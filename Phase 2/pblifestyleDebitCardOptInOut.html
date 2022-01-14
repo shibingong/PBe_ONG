@@ -1,0 +1,666 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Style-Puvan -->
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="fontawesome/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <!-- Fonts -->
+    <link href="http://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;500;700&display=swap" rel="stylesheet" />
+
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+
+    <title>PB Lifestyle Debit Card - Opt Out / In</title>
+
+    <!-- MultiSelect -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+
+    <!-- FlatPickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <style>
+        .editBtn {
+            background-color: transparent !important;
+            color: #212529 !important;
+            border: 1px solid #212529 !important;
+            cursor: pointer !important;
+        }
+
+        .cancelBtn {
+            background-color: transparent !important;
+            color: #D64354 !important;
+            border: 1px solid #D64354 !important;
+            cursor: pointer !important;
+        }
+
+        /* success */
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #7ac142;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards
+        }
+
+        .checkmark {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #fff;
+            stroke-miterlimit: 10;
+            margin: 10% auto;
+            box-shadow: inset 0px 0px 0px #7ac142;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0
+            }
+        }
+
+        @keyframes scale {
+
+            0%,
+            100% {
+                transform: none
+            }
+
+            50% {
+                transform: scale3d(1.1, 1.1, 1)
+            }
+        }
+
+        @keyframes fill {
+            100% {
+                box-shadow: inset 0px 0px 0px 30px #7ac142
+            }
+        }
+
+        /* failed */
+        .failedmark {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #fff;
+            stroke-miterlimit: 10;
+            box-shadow: inset 0px 0px 0px #ff0000;
+            animation: fill2 .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both
+        }
+
+        .failedmark_circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #ff0000;
+            fill: none;
+            animation: stroke2 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards
+        }
+
+        .failedmark_check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke2 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards
+        }
+
+        @keyframes stroke2 {
+            100% {
+                stroke-dashoffset: 0
+            }
+        }
+
+        @keyframes scale {
+
+            0%,
+            100% {
+                transform: none
+            }
+
+            50% {
+                transform: scale3d(1.1, 1.1, 1)
+            }
+        }
+
+        @keyframes fill2 {
+            100% {
+                box-shadow: inset 0px 0px 0px 30px #ff0000
+            }
+        }
+
+        /* 11-11-2021 */
+
+        @media (max-width: 576px) {
+
+            #tokenText,
+            #notiText {
+                font-size: 14px;
+            }
+
+            #reqPacBtn {
+                width: 100%;
+            }
+
+            .checkTextDIV h5 {
+                font-size: 16px;
+                margin-left: 20px;
+            }
+
+            .checkTextDIV p {
+                font-size: 13px;
+                margin-left: 20px;
+            }
+        }
+
+        @media (min-width: 576px) {
+
+            #tokenText,
+            #notiText,
+            #secureText,
+            #pacText {
+                font-size: 16px;
+            }
+
+            #reqPacBtn {
+                width: 100%;
+            }
+
+            .checkTextDIV {
+                margin-top: 10px;
+            }
+
+            .checkTextDIV h5 {
+                font-size: 18px;
+            }
+
+            .checkTextDIV p {
+                font-size: 14px;
+            }
+        }
+
+        @media (min-width: 768px) {
+
+            #tokenText,
+            #notiText,
+            #secureText,
+            #pacText {
+                font-size: 16px;
+            }
+
+            .checkTextDIV h5 {
+                font-size: 20px;
+            }
+
+            .checkTextDIV p {
+                font-size: 15px;
+            }
+
+
+        }
+
+        @media (min-width: 992px) {
+
+            #notiText {
+                margin-top: 6px;
+            }
+
+            .checkTextDIV h5 {
+                font-size: 20px;
+            }
+
+            .checkTextDIV p {
+                font-size: 15px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+
+            .checkTextDIV h5 {
+                font-size: 22px;
+            }
+
+            .checkTextDIV p {
+                font-size: 16px;
+            }
+        }
+
+        @media (min-width: 1400px) {
+
+            #tokenText,
+            #notiText,
+            #secureText,
+            #pacText {
+                font-size: 18px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .pictureRow {
+                position: fixed;
+                top: 100;
+                right: 100;
+            }
+
+            .formRow {
+                position: relative;
+                top: 0;
+                right: 200px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="d-none d-lg-block" style="height:5vh;"></div>
+
+    <div class="container gx-1 gx-lg-0 mt-3 mt-lg-5 my-auto">
+        <div class="row mt-2 justify-content-center">
+            <div class="col-lg-8 formRow px-4">
+                <div class="row justify-content-center ">
+
+                    <div class="col-12 col-lg-5 col-xl-6 p-5 text-center position-relative">
+                        <h3>PB Lifestyle Debit Card - Opt Out / In for Card Not Present and Overseas Retail Transactions
+                        </h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.
+                        </p>
+                    </div>
+
+                    <div id="firstPage" class="col-12 col-lg-8">
+                        <form>
+                            <div class="row mb-2">
+                                <label for="accNumber" class="col-sm-12 col-form-label">Account No.</label>
+                                <div class="col-sm-12 mb-2">
+
+                                    <select class="form-select" id="accNumberSelect"
+                                        aria-label="Default select example">
+                                        <option selected>40001518</option>
+                                        <option>95774453</option>
+                                        <option>12354898</option>
+                                        <option>12354891</option>
+                                        <option>14680642</option>
+                                        <option>54670423</option>
+                                        <option>40054898</option>
+                                        <option>95771468</option>
+                                    </select>
+                                    <span class="field-validation-valid text-danger ps-1" style="font-size:14px"
+                                        data-valmsg-replace="true"></span>
+                                </div>
+                            </div>
+
+                            <div class="row my-5 last-row">
+                                <div class="col-12">
+                                    <a class="btn btn-dark float-start" href="@Url.Action(" CardSettings", "Home" )">
+                                        Back
+                                    </a>
+                                    <a id="firstNext" class="btn btn-primary  float-end"> Next </a>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div hidden id="secondPage" class="col-12 col-lg-8 px-4">
+                        <form>
+                            <div class="row mb-2">
+                                <label for="accNumber" class="col-sm-12 col-form-label">Account No.</label>
+                                <div class="col-sm-12 mb-2">
+                                    <input type="text" class="form-control mb-2" id="accNumber" disabled>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <label for="cardNumber" class="col-sm-12 col-form-label">Card No.</label>
+                                <div class="col-sm-12 mb-2">
+
+                                    <select class="form-select" id="cardNumberSelect"
+                                        aria-label="Default select example">
+                                        <option value="4848100007306224" selected>4848100007306224 ARJUNA A/L DASARATHA
+                                        </option>
+                                        <option value="9493029134818487">9493029134818487 ARJUNA A/L DASARATHA</option>
+                                        <option value="5453743829328738">5453743829328738 ARJUNA A/L DASARATHA</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <label for="cardOptStatus" class="col-sm-12 col-form-label">Card Opt Status</label>
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="optIn"
+                                        value="Opt In">
+                                    <label class="form-check-label" for="optIn">
+                                        Opt In
+                                    </label>
+                                </div>
+                                <div class="form-check ms-3">
+                                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="optOut"
+                                        value="Opt Out">
+                                    <label class="form-check-label" for="optOut">
+                                        Opt Out
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2 justify-content-between pacField">
+
+                                <label for="tranAmount" class="col-sm-12 col-form-label">PAC</label>
+
+                                <div class="col-7 col-sm-8 col-md-9 col-lg-7 col-xl-8">
+                                    <input type="text" class="form-control" id="PAC">
+                                </div>
+
+                                <div
+                                    class="col-5 col-sm-4 col-md-3 col-lg-5 col-xl-4 ps-0 text-end text-lg-center mt-0">
+                                    <a class="btn btn-info reqPacBtn text-white float-lg-end">Request PAC</a>
+                                </div>
+
+                                <div class="description mt-1">
+                                    <span>Didn't get the code?</span>
+                                    <a hidden href="#" id="ResendPAC"
+                                        class="text-decoration-none ms-3 mb-2">Resend(1/3)</a>
+                                    <p class="text-muted">A 6 digit PAC will be sent to your registered mobile phone
+                                        number
+                                        *****6168. Please click "Request PAC" if you wish to proceed</p>
+                                    <p class="timerText" hidden>Time remaining: <span id="time"
+                                            style="color:#d64354"></span>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="row my-5 last-row">
+                                <div class="col-12">
+                                    <a class="btn btn-dark float-start" href="@Url.Action(" CardSettings", "Home" )">
+                                        Back
+                                    </a>
+                                    <a id="secondNext" class="btn btn-primary  float-end"> Next </a>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <div hidden id="thirdPage" class="col-12 col-lg-8 px-4">
+                        <div class="p-4 shadow bg-white rounded-8">
+
+                            <div class="row logoRow mb-4">
+
+                                <div class="col-2 checkIconDIV">
+
+                                    <div class="successIcon text-start">
+                                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                                            <path class="checkmark__check" fill="none"
+                                                d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                                        </svg>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-10 checkTextDIV">
+                                    <h5>Card Opt Status Changed Successfully</h5>
+                                    <p class="text-muted">4 May 2018, 12:59:12pm</p>
+                                </div>
+
+                            </div>
+                            <div class="row detailsRow">
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-start leftReference">
+                                    <label>Reference No.</label>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-start text-sm-end rightReference">
+                                    <label>551480</label>
+                                </div>
+
+                            </div>
+
+                            <div class="row detailsRow">
+
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-start leftReference">
+                                    <label>Card No.</label>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-start text-sm-end rightReference">
+                                    <label id='ackCardNum'></label>
+                                </div>
+
+                            </div>
+
+                            <div class="row detailsRow">
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-start leftReference">
+                                    <label>New Opt Status</label>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-start text-sm-end rightReference">
+                                    <label id='ackOptStatus'></label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row my-5 last-row">
+                            <div class="col-12">
+                                <a class="btn btn-dark float-start"> Print </a>
+                                <a id="secondNext" class="btn btn-primary  float-end" href="@Url.Action("
+                                    CardSettings", "Home" )"> Done </a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="alert alert-info col-10 col-sm-11 col-xxl-18 col-lg-8 rounded-8 shadow-sm my-5 px-3"
+                        role="alert">
+                        <b>Note</b><br>
+                        <ul>
+                            <li>
+                                Choose an account to perform PB Lifestyle Debit Card - Opt Out / In for Card Not Present
+                                and Overseas Retail Transactions.
+                            </li>
+                            <li>
+                                Card-not-present (CNP) is a card payment transaction where the cardholder is not
+                                physically present at the merchant when payment is made.
+                            </li>
+                            <li>CNP transaction includes:
+                                <ol type="i">
+                                    <li>Non-secured online transaction</li>
+                                    <li>Mail Order Telephone Order</li>
+                                    <li>Recurring / Auto Debit transaction performed outside of Malaysia.</li>
+                                </ol>
+                            </li>
+                            <li>Overseas transaction is a transaction performed outside of Malaysia.</li>
+                            <li>Overseas transaction includes:
+                                <ol type="i">
+                                    <li>Cash withdrawal at overseas ATM</li>
+                                    <li>Overseas point-of-sale purchase ("POS")</li>
+                                </ol>
+                            </li>
+                            <li>Opting-in a card incorporates both CNP and overseas transaction. Failing to opt-in your
+                                Card for overseas transaction will not permit any transactions abroad.</li>
+                            <li>To change the opt out or in status, click on the account number.</li>
+                            <li>Please call the Self Service Terminal Call Centre at +603-2179 5000 if you require
+                                further information.</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-12 col-lg-4 last-row p-4 mt-4 p-sm-2 text-center pictureRow">
+                <img src="~/Images/WebsiteImages/register-win-pbe-login02.jpg" class="img-fluid " />
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <!-- J-Query -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- MultiSelect Choices JS-->
+    <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+
+    <!-- FlatPickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        var display = $('#time'),
+            oneMin = 60;
+
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+
+            var timerInterval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.text(minutes + " : " + seconds);
+
+                if (--timer < 0) {
+                    clearInterval(timerInterval);
+                    timer = duration;
+                    $('.reqPacBtn').removeClass('disabled');
+                    $('.timerText').prop("hidden", true);
+                }
+            }, 1000);
+        }
+
+        $(document).ready(function () {
+
+
+            $('.mobileNav').each(function () {
+                $(this).removeClass('active');
+            })
+            $('.nav-link').each(function () {
+                $(this).removeClass('active');
+            })
+            $('.profile').each(function () {
+                $(this).addClass('active');
+            });
+            $('.profileMenu').addClass('active');
+
+            $('#firstNext').on('click', function () {
+
+                $('#secondPage').attr('hidden', false);
+                $('#firstPage').attr('hidden', true);
+                $('#thirdPage').attr('hidden', true);
+
+                $('#accNumber').val($('#accNumberSelect option:selected').text());
+
+                getOptStatus($('#cardNumberSelect option:selected').val());
+                showHidePAC();
+
+            });
+
+            $('#cardNumberSelect').change(function () {
+                getOptStatus($('#cardNumberSelect option:selected').val());
+                showHidePAC();
+            })
+
+            $('input[type="radio"]').change(function () {
+                showHidePAC();
+            })
+
+            function getOptStatus(cardNum) {
+                switch (cardNum) {
+                    case '4848100007306224':
+                        $('#optIn').prop('checked', true);
+                        break;
+                    case '9493029134818487':
+                        $('#optOut').prop('checked', true);
+                        break;
+                    case '5453743829328738':
+                        $('#optIn').prop('checked', true);
+                }
+            }
+
+            function showHidePAC() {
+                if ($('#optIn').prop('checked')) {
+                    $('.pacField').attr("hidden", false);
+                    $('#secondNext').addClass('disabled');
+                }
+                else {
+                    $('.pacField').attr("hidden", true);
+                    $('#secondNext').removeClass('disabled');
+                }
+            }
+
+            $('.reqPacBtn').on('click', function () {
+                Swal.fire(
+                    'OTP is Sent!',
+                    'OTP sent to your phone number 012 - * * * * 123',
+                    'success'
+                )
+                $('#secondNext').removeClass('disabled');
+                $('.reqPacBtn').addClass('disabled');
+                $('.timerText').prop("hidden", false);
+                startTimer(oneMin, display);
+            })
+            $('#secondNext').on('click', function () {
+                Swal.fire({
+                    title: 'Card Opt Status Changed Successfully',
+                    icon: 'success',
+                    customClass: {
+                        title: 'alertFontStyle'
+                    }
+                }).then(function () {
+                    $('#thirdPage').attr('hidden', false);
+                    $('#secondPage').attr('hidden', true);
+                    $('#firstPage').attr('hidden', true);
+                    $('#ackOptStatus').html($('input[type="radio"]:checked').val());
+                    $('#ackCardNum').html($("#cardNumberSelect option:selected").val());
+                });
+            })
+
+        });
+
+        //reset button
+        $('.btnReset').on('click', function () {
+            $('form')[0].reset();
+        });
+
+    </script>
+</body>
+
+</html>
