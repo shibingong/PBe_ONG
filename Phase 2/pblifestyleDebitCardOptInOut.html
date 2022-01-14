@@ -332,28 +332,28 @@
                     </div>
 
                     <div hidden id="secondPage" class="col-12 col-lg-8 px-4">
+
+                        <div class="row mb-2">
+                            <label for="accNumber" class="col-sm-12 col-form-label">Account No.</label>
+                            <div class="col-sm-12 mb-2">
+                                <input type="text" class="form-control mb-2" id="accNumber" disabled>
+                            </div>
+                        </div>
+
+                        <div class="row mb-2">
+                            <label for="cardNumber" class="col-sm-12 col-form-label">Card No.</label>
+                            <div class="col-sm-12 mb-2">
+
+                                <select class="form-select" id="cardNumberSelect" aria-label="Default select example">
+                                    <option value="4848100007306224" selected>4848100007306224 ARJUNA A/L DASARATHA
+                                    </option>
+                                    <option value="9493029134818487">9493029134818487 ARJUNA A/L DASARATHA</option>
+                                    <option value="5453743829328738">5453743829328738 ARJUNA A/L DASARATHA</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <form>
-                            <div class="row mb-2">
-                                <label for="accNumber" class="col-sm-12 col-form-label">Account No.</label>
-                                <div class="col-sm-12 mb-2">
-                                    <input type="text" class="form-control mb-2" id="accNumber" disabled>
-                                </div>
-                            </div>
-
-                            <div class="row mb-2">
-                                <label for="cardNumber" class="col-sm-12 col-form-label">Card No.</label>
-                                <div class="col-sm-12 mb-2">
-
-                                    <select class="form-select" id="cardNumberSelect"
-                                        aria-label="Default select example">
-                                        <option value="4848100007306224" selected>4848100007306224 ARJUNA A/L DASARATHA
-                                        </option>
-                                        <option value="9493029134818487">9493029134818487 ARJUNA A/L DASARATHA</option>
-                                        <option value="5453743829328738">5453743829328738 ARJUNA A/L DASARATHA</option>
-                                    </select>
-                                </div>
-                            </div>
-
                             <div class="row mb-2">
                                 <label for="cardOptStatus" class="col-sm-12 col-form-label">Card Opt Status</label>
                                 <div class="form-check ms-3">
@@ -400,10 +400,15 @@
 
                             <div class="row my-5 last-row">
                                 <div class="col-12">
-                                    <a class="btn btn-dark float-start" href="@Url.Action(" CardSettings", "Home" )">
-                                        Back
+                                    <a class="btn btn-dark col-5 col-sm-3 me-sm-2 col-lg-5 col-xxl-3"
+                                        href="@Url.Action(" CardSettings", "Home" )"> Back
                                     </a>
-                                    <a id="secondNext" class="btn btn-primary  float-end"> Next </a>
+                                    <a
+                                        class="btn btn-outline-primary btnReset col-5 float-end col-sm-3 float-sm-none col-lg-5 float-lg-end float-xxl-none col-xxl-3">
+                                        Clear </a>
+                                    <a id="secondNext"
+                                        class="btn btn-primary col-12 col-sm-3 mt-2 mt-sm-0 float-sm-end col-lg-12 mt-lg-2 col-xxl-3 mt-xxl-0 disabled">
+                                        Next </a>
                                 </div>
                             </div>
                         </form>
@@ -657,7 +662,7 @@
 
         //reset button
         $('.btnReset').on('click', function () {
-            $('form')[0].reset();
+            $('form')[1].reset();
         });
 
     </script>
