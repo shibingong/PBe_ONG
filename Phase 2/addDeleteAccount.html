@@ -1,0 +1,1501 @@
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap 5 -->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Style-Puvan -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- FontAwesome CSS -->
+    <link rel="stylesheet" href="fontawesome/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+
+    <!-- Fonts -->
+    <link href="http://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;500;700&display=swap" rel="stylesheet" />
+
+    <!-- Sweet Alert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="sweetalert2.all.min.js"></script>
+
+    <title>Add / Delete Account</title>
+
+    <!-- MultiSelect -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.css">
+
+    <!-- FlatPickr -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <style>
+        .editBtn {
+            background-color: transparent !important;
+            color: #212529 !important;
+            border: 1px solid #212529 !important;
+            cursor: pointer !important;
+        }
+
+        .cancelBtn {
+            background-color: transparent !important;
+            color: #D64354 !important;
+            border: 1px solid #D64354 !important;
+            cursor: pointer !important;
+        }
+
+        /* success */
+        .checkmark__circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #7ac142;
+            fill: none;
+            animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards
+        }
+
+        .checkmark {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #fff;
+            stroke-miterlimit: 10;
+            margin: 10% auto;
+            box-shadow: inset 0px 0px 0px #7ac142;
+            animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both
+        }
+
+        .checkmark__check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards
+        }
+
+        @keyframes stroke {
+            100% {
+                stroke-dashoffset: 0
+            }
+        }
+
+        @keyframes scale {
+
+            0%,
+            100% {
+                transform: none
+            }
+
+            50% {
+                transform: scale3d(1.1, 1.1, 1)
+            }
+        }
+
+        @keyframes fill {
+            100% {
+                box-shadow: inset 0px 0px 0px 30px #7ac142
+            }
+        }
+
+        /* failed */
+        .failedmark {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: block;
+            stroke-width: 2;
+            stroke: #fff;
+            stroke-miterlimit: 10;
+            box-shadow: inset 0px 0px 0px #ff0000;
+            animation: fill2 .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both
+        }
+
+        .failedmark_circle {
+            stroke-dasharray: 166;
+            stroke-dashoffset: 166;
+            stroke-width: 2;
+            stroke-miterlimit: 10;
+            stroke: #ff0000;
+            fill: none;
+            animation: stroke2 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards
+        }
+
+        .failedmark_check {
+            transform-origin: 50% 50%;
+            stroke-dasharray: 48;
+            stroke-dashoffset: 48;
+            animation: stroke2 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards
+        }
+
+        @keyframes stroke2 {
+            100% {
+                stroke-dashoffset: 0
+            }
+        }
+
+        @keyframes scale {
+
+            0%,
+            100% {
+                transform: none
+            }
+
+            50% {
+                transform: scale3d(1.1, 1.1, 1)
+            }
+        }
+
+        @keyframes fill2 {
+            100% {
+                box-shadow: inset 0px 0px 0px 30px #ff0000
+            }
+        }
+
+        /* 11-11-2021 */
+
+        @media (max-width: 576px) {
+
+            #tokenText,
+            #notiText {
+                font-size: 14px;
+            }
+
+            #reqPacBtn {
+                width: 100%;
+            }
+
+            .checkTextDIV h5 {
+                font-size: 16px;
+                margin-left: 20px;
+            }
+
+            .checkTextDIV p {
+                font-size: 13px;
+                margin-left: 20px;
+            }
+        }
+
+        @media (min-width: 576px) {
+
+            #tokenText,
+            #notiText,
+            #secureText,
+            #pacText {
+                font-size: 16px;
+            }
+
+            #reqPacBtn {
+                width: 100%;
+            }
+
+            .checkTextDIV {
+                margin-top: 10px;
+            }
+
+            .checkTextDIV h5 {
+                font-size: 18px;
+            }
+
+            .checkTextDIV p {
+                font-size: 14px;
+            }
+        }
+
+        @media (min-width: 768px) {
+
+            #tokenText,
+            #notiText,
+            #secureText,
+            #pacText {
+                font-size: 16px;
+            }
+
+            .checkTextDIV h5 {
+                font-size: 20px;
+            }
+
+            .checkTextDIV p {
+                font-size: 15px;
+            }
+
+
+        }
+
+        @media (min-width: 992px) {
+
+            #notiText {
+                margin-top: 6px;
+            }
+
+            .checkTextDIV h5 {
+                font-size: 20px;
+            }
+
+            .checkTextDIV p {
+                font-size: 15px;
+            }
+        }
+
+        @media (min-width: 1200px) {
+
+            .checkTextDIV h5 {
+                font-size: 22px;
+            }
+
+            .checkTextDIV p {
+                font-size: 16px;
+            }
+        }
+
+        @media (min-width: 1400px) {
+
+            #tokenText,
+            #notiText,
+            #secureText,
+            #pacText {
+                font-size: 18px;
+            }
+        }
+
+        @media (min-width: 992px) {
+            .pictureRow {
+                position: fixed;
+                top: 100;
+                right: 100;
+            }
+
+            .formRow {
+                position: relative;
+                top: 0;
+                right: 200px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="d-none d-lg-block" style="height:5vh;"></div>
+
+    <div class="container gx-1 gx-lg-0 mt-3 mt-lg-5 my-auto">
+        <div class="row mt-2 justify-content-center">
+            <div class="col-lg-8 formRow px-4">
+                <div class="row justify-content-center ">
+
+                    <div class="col-12 col-lg-5 col-xl-6 p-5 text-center position-relative">
+                        <!-- <img src="~/Images/WebDecoratives/pin-number.png" class="img-fluid position-absolute"
+                            style="width: 150px;left: 35%;top: 45px;" />
+                        <img src="~/Images/WebDecoratives/Work risk-free.svg" class="mb-4 img-fluid "
+                            style="width:300px" /> -->
+                        <h3 id="addDelAccTitle">Add / Delete Account</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua.
+                        </p>
+                    </div>
+
+
+                    <div id="firstPage" class="col-12 col-lg-8 px-lg-0 px-4">
+
+                        <div class="row justify-content-center">
+
+                            <div class="col-12 table-responsive">
+
+                                <table
+                                    class="table table-responsive table-borderless table-hover p-lg-2 p-0 shadow-sm rounded-8 bg-white"
+                                    style="width:100%" id="accTable">
+                                    <thead class="bg-dark text-white rounded-8">
+                                        <tr style="text-align:center">
+                                            <th class="small">Delete</th>
+                                            <th class="small">Account No.</th>
+                                            <th class="small">Account Type</th>
+                                            <th class="small">Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input deleteAccRadio" type="radio"
+                                                    name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Current</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input deleteAccRadio" type="radio"
+                                                    name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Current</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input deleteAccRadio" type="radio"
+                                                    name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Visa Debit Card</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input deleteAccRadio" type="radio"
+                                                    name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Current</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                            <div class="col-12 p-lg-2 p-0"><a id="addAccountBtn"
+                                    class="btn col-12 border border-1 border-danger font-semibold text-danger btn-sm"><span
+                                        class="pe-1"><i class="fad fa-plus"></i></span>Add Account</a></div>
+
+                        </div>
+
+                        <div class="row my-5 last-row">
+                            <div class="col-12">
+                                <a class="btn btn-dark float-start" href="@Url.Action(" CardSettings", "Home" )">
+                                    Back
+                                </a>
+                                <a id="deleteBtn" class="btn btn-primary  float-end disabled"> Delete </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Add Account -->
+                    <div hidden id="secondPage" class="col-12 col-lg-8 px-4">
+
+                        <div class="row mb-2">
+                            <label for="accType" class="col-sm-12 col-form-label">Account Type</label>
+                            <div class="col-sm-12 mb-2">
+
+                                <select class="form-select" id="accTypeSelect" aria-label="Default select example">
+                                    <option selected>Please select</option>
+                                    <option value="1">Savings / Current Account</option>
+                                    <option value="2">Credit / Debit Card</option>
+                                    <option value="3">Fixed Deposit Account</option>
+                                    <option value="4">Foreign Currency Account</option>
+                                    <option value="5">Gold Investment Account</option>
+                                    <option value="6">Hire Purchase Account</option>
+                                    <option value="7">Loans Account</option>
+                                    <option value="8">Share Link Account</option>
+                                </select>
+                                <span class="field-validation-valid text-danger ps-1" style="font-size:14px"
+                                    data-valmsg-replace="true"></span>
+                            </div>
+                        </div>
+
+                        <div class="row my-5 last-row">
+                            <div class="col-12">
+                                <a class="btn btn-dark float-start" href="@Url.Action(" CardSettings", "Home" )"> Back
+                                </a>
+                                <a id="secondNext" class="btn btn-primary  float-end"> Next </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div hidden id="thirdPage" class="col-12 col-lg-8 px-4">
+                        <form>
+
+                            <div class="row mb-2">
+                                <label for="icPassport" class="col-sm-12 col-form-label">Old IC / New IC / Passport /
+                                    Armed Forces No.</label>
+                                <div class="col-sm-12">
+                                    <input type="number" class="form-control mb-2"
+                                        placeholder="Enter Old IC / New IC / Passport / Armed Forces No.">
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <label for="accType" class="col-sm-12 col-form-label">Account Type</label>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control mb-2" id="accTypeInput" disabled>
+                                </div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <label for="accNo" class="col-sm-12 col-form-label">Account No.</label>
+                                <div class="col-sm-12">
+                                    <input type="number" class="form-control mb-2" placeholder="Enter Account No.">
+                                </div>
+                            </div>
+
+                            <div class="row mb-2 cvvNo" hidden>
+                                <label for="cvvNo" class="col-sm-12 col-form-label">CVV No.</label>
+                                <div class="col-sm-12">
+                                    <input type="number" class="form-control mb-2" placeholder="Enter CVV No.">
+                                </div>
+                            </div>
+
+                            <div class="row mb-2 hpNoteNo" hidden>
+                                <label for="hpNoteNo" class="col-sm-12 col-form-label">Note No.</label>
+                                <div class="col-sm-12">
+                                    <input type="number" class="form-control mb-2" placeholder="Enter Note No.">
+                                </div>
+                            </div>
+
+                            <div class="row mb-2 loanNoteNo" hidden>
+                                <label for="loanNoteNo" class="col-sm-12 col-form-label">Note No.</label>
+                                <div class="col-sm-12">
+                                    <input type="number" class="form-control mb-2" placeholder="Enter Note No.">
+                                </div>
+                            </div>
+
+                            <div class="row myFA1 mb-2">
+                                <label class="col-sm-12 col-form-label">Approve this update with</label>
+
+                                <div class="col-sm-12 mb-2">
+                                    <select class="form-select" aria-label="Default select example" id="authMethod">
+                                        <option value="" disabled selected>Please select your approval method</option>
+                                        <option value="noti">PB SecureSign (Push Notification)</option>
+                                        <option value="secure">PB SecureSign (SecurePAC)</option>
+                                        <option value="token">SecureSign Token</option>
+                                        <option value="pac">SMS PAC</option>
+                                    </select>
+
+
+                                </div>
+                                <div class="col-sm-3 ps-sm-1 authConfirmBtn" hidden>
+                                    <button class="btn btn-danger bg-primary col-12">Confirm</button>
+                                </div>
+
+                                <div class="col-sm-12 authField" hidden>
+
+                                    <div class="row justify-content-between  myFA2" id="pac" mt-2>
+
+                                        <div class="zz col-3 col-lg-2 col-xxl-3">
+                                            <label for="PAC" class="col-sm-3 col-form-label">
+                                                <img src="/puvan/icon/twoFA/otp.png" alt="" width="100" height="100">
+                                            </label>
+                                        </div>
+
+                                        <div class="col-8 col-md-9 row d-block d-md-none" id="pacTextandBtn">
+
+                                            <div class="digitPac col-12 col-md-6 col-lg-8">
+
+                                                <input type="text" class="form-control mt-2 mt-lg-0" id="PAC">
+
+                                            </div>
+
+                                            <div class="col-12 col-md-3 col-lg-12 col-xl-3">
+                                                <button type="button"
+                                                    class="col-12 reqPacBtn pac btn btn-info pac text-white float-lg-end mt-2"
+                                                    id="reqPacBtn">
+                                                    Request
+                                                    PAC
+                                                </button>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-12 d-block d-md-none">
+                                            <p class="text-muted">
+                                                A 6 digit PAC will be sent to your registered mobile phone
+                                                number
+                                                ***6168. Please click "Request PAC" if you wish to proceed
+                                            </p>
+
+                                        </div>
+
+                                        <div class="digitPac col-md-6 col-xxl-6 d-none d-md-block">
+
+                                            <input type="text" class="form-control mt-2" id="PAC">
+
+                                            <p class="text-muted  d-none d-md-block">
+                                                A 6 digit PAC will be sent to your registered mobile phone
+                                                number
+                                                ***6168. Please click "Request PAC" if you wish to proceed
+                                            </p>
+
+                                        </div>
+
+                                        <div class=" col-12 col-md-3 ps-md-1 d-none d-md-block">
+                                            <button type="button"
+                                                class="reqPacBtn col-12 btn btn-info pac text-white  mt-2"
+                                                id="reqPacBtn">
+                                                Request
+                                                PAC
+                                            </button>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row myFA3 d-none" id="token" mt-2>
+
+                                        <div class="zz col-3">
+                                            <label for="hToken" class="col-sm-3 col-form-label">
+                                                <img src="/puvan/icon/twoFA/securesigntoken.png" alt="" width="90"
+                                                    height="120">
+                                            </label>
+                                        </div>
+
+                                        <div class="col-9">
+
+                                            <p class="text-muted my-2" id="tokenText">
+                                                Switch on your SecureSign token and follow the instrution
+                                                below to
+                                                generate on your SecureSign Code.
+                                            </p>
+
+                                            <ol class="d-none d-md-block">
+                                                <li>Press "sign" button. You will see a '1' display on the screen.</li>
+                                                <li>Enter xxxxx and press 'OK'.</li>
+                                                <li>You will see a '2" dispaly on screen.</li>
+                                                <li>Enter xxxx and press 'OK.'</li>
+                                                <li>The SecureSign will be displayed on screen.</li>
+                                            </ol>
+
+                                            <input type="text" class="form-control mt-0" id="hToken"
+                                                placeholder="Enter your SecureSign Code">
+
+                                        </div>
+
+                                        <div class="col-12 d-block d-md-none mt-2">
+                                            <ol>
+                                                <li>Press "sign" button. You will see a '1' display on the screen.</li>
+                                                <li>Enter xxxxx and press 'OK'.</li>
+                                                <li>You will see a '2" dispaly on screen.</li>
+                                                <li>Enter xxxx and press 'OK.'</li>
+                                                <li>The SecureSign will be displayed on screen.</li>
+                                            </ol>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row myFA4 d-none" id="noti" mt-2>
+
+                                        <div class="zz col-3 col-lg-3 col-xl-2">
+                                            <label for="notification" class="col-sm-3 col-form-label">
+                                                <img src="/puvan/icon/twoFA/success.png" alt="" width="90" height="90">
+                                            </label>
+                                        </div>
+
+                                        <div class="col-md-6 col-lg-6 col-xl-7 col-9 mt-2 mt-lg-0">
+
+                                            <p id="notiText">
+                                                A push notification will be sent to your mobile phone. Please verify the
+                                                details
+                                                at
+                                                your PB SecureSign screen before approving transaction.
+                                            </p>
+
+                                        </div>
+
+                                        <div class="d-block d-md-none">
+                                            <button type="button" class="btn btn-info pac text-white float-lg-end w-100"
+                                                data-bs-toggle="modal" data-bs-target="#staticBackdropPhone">Push
+                                                Notification</button>
+
+                                            <!-- Modal -->
+
+                                            <div class="modal fade" id="staticBackdropPhone" data-bs-backdrop="static"
+                                                data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropPhoneLabel" aria-hidden="true">
+
+                                                <div class="modal-dialog modal-dialog-centered">
+
+                                                    <div class="modal-content">
+
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">
+                                                                PB SecureSign
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+
+                                                            <div class="container-fluid">
+
+                                                                <div class="row">
+
+                                                                    <div
+                                                                        class="col-sm-12 d-flex justify-content-center">
+                                                                        <img src="/puvan/icon/twoFA/animation_500_kugn1p08.gif"
+                                                                            alt="" width="300" height="300">
+                                                                    </div>
+
+                                                                    <div class="col-sm-12">
+                                                                        <p>
+                                                                            Please check your mobile device (Iphone12)
+                                                                            for a
+                                                                            push
+                                                                            notification to approve the transacion
+                                                                        </p>
+                                                                    </div>
+
+                                                                    <div class="col-sm-12">
+
+                                                                        <div class="progress">
+
+                                                                            <div class="progress-bar bg-danger active"
+                                                                                role="progressbar" aria-valuenow="0"
+                                                                                aria-valuemin="0" aria-valuemax="100"
+                                                                                style="width:0%">
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3 col-9 ps-md-1 d-none d-md-block">
+                                            <button type="button" class="btn btn-info col-12 pac text-white  mt-2"
+                                                data-bs-toggle="modal" data-bs-target="#staticBackdrop">Push
+                                                Notification</button>
+
+                                            <!-- Modal -->
+
+                                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static"
+                                                data-bs-keyboard="false" tabindex="-1"
+                                                aria-labelledby="staticBackdropLabel" aria-hidden="true">
+
+                                                <div class="modal-dialog modal-dialog-centered">
+
+                                                    <div class="modal-content">
+
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="staticBackdropLabel">
+                                                                PB SecureSign
+                                                            </h5>
+                                                            <button type="button" class="btn-close"
+                                                                data-bs-dismiss="modal" aria-label="Close"></button>
+                                                        </div>
+
+                                                        <div class="modal-body">
+
+                                                            <div class="container-fluid">
+
+                                                                <div class="row">
+
+                                                                    <div
+                                                                        class="col-sm-12 d-flex justify-content-center">
+                                                                        <img src="/puvan/icon/twoFA/animation_500_kugn1p08.gif"
+                                                                            alt="" width="300" height="300">
+                                                                    </div>
+
+                                                                    <div class="col-sm-12">
+                                                                        <p>
+                                                                            Please check your mobile device (Iphone12)
+                                                                            for a
+                                                                            push
+                                                                            notification to approve the transacion
+                                                                        </p>
+                                                                    </div>
+
+                                                                    <div class="col-sm-12">
+
+                                                                        <div class="progress">
+
+                                                                            <div class="progress-bar bg-danger active"
+                                                                                role="progressbar" aria-valuenow="0"
+                                                                                aria-valuemin="0" aria-valuemax="100"
+                                                                                style="width:0%">
+                                                                            </div>
+
+                                                                        </div>
+
+                                                                    </div>
+
+                                                                </div>
+
+                                                            </div>
+
+                                                        </div>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row myFA5 d-none" id="secure" mt-2>
+
+                                        <div class="zz col-3">
+                                            <label for="secure" class="col-sm-3 col-form-label">
+                                                <img src="/puvan/icon/twoFA/kp2.png" alt="" width="90" height="90">
+                                            </label>
+                                        </div>
+
+                                        <div class="col-9">
+
+                                            <p class="text-muted mt-1" id="secureText">
+                                                Open your PB engage mobile app and follow the instruction
+                                                below to
+                                                generate your SecurePac
+                                            </p>
+
+                                            <ol class="d-none d-sm-block">
+                                                <li>Launch your PB engage mobile app.</li>
+                                                <li>From the side menu, select "PB SecureSign".</li>
+                                                <li>Verify the transaction details before you click "proceed".</li>
+                                                <li>Enter your SecurePIN or authentucate with your fingerpint/Face ID
+                                                </li>
+                                                <li>The 6 digits SecurePAC will be displayed on the screen</li>
+                                            </ol>
+
+                                            <input type="text" class="form-control d-none d-sm-block" id="secure"
+                                                placeholder="Enter SecurePAC">
+
+                                        </div>
+
+                                        <div class="col-12 d-block d-sm-none">
+
+                                            <ol>
+                                                <li>Launch your PB engage mobile app.</li>
+                                                <li>From the side menu, select "PB SecureSign".</li>
+                                                <li>Verify the transaction details before you click "proceed".</li>
+                                                <li>Enter your SecurePIN or authentucate with your fingerpint/Face ID
+                                                </li>
+                                                <li>The 6 digits SecurePAC will be displayed on the screen</li>
+                                            </ol>
+
+                                            <input type="text" class="form-control d-block d-lg-none" id="secure"
+                                                placeholder="Enter SecurePAC">
+
+                                        </div>
+
+                                    </div>
+
+                                    <p class="timerText" hidden>Time remaining: <span class="time"
+                                            style="color:#d64354"></span></p>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row my-5 last-row">
+                                <div class="col-12">
+                                    <a class="btn btn-dark col-5 col-sm-3 me-sm-2 col-lg-5 col-xxl-3"
+                                        href="@Url.Action(" CardSettings", "Home" )"> Back
+                                    </a>
+                                    <a
+                                        class="btn btn-outline-primary btnReset col-5 float-end col-sm-3 float-sm-none col-lg-5 float-lg-end float-xxl-none col-xxl-3">
+                                        Clear </a>
+                                    <a id="thirdNext"
+                                        class="btn btn-primary col-12 col-sm-3 mt-2 mt-sm-0 float-sm-end col-lg-12 mt-lg-2 col-xxl-3 mt-xxl-0 disabled">
+                                        Next </a>
+                                </div>
+                            </div>
+
+                        </form>
+
+                    </div>
+
+                    <!-- <div hidden id="forthPage" class="col-12 col-lg-8 mt-3 px-4">
+
+                        <div class="p-4 shadow bg-white rounded-8">
+
+                            <div class="row logoRow mb-4">
+
+                                <div class="col-2 checkIconDIV">
+
+                                    <div class="successIcon text-start">
+                                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                                            <path class="checkmark__check" fill="none"
+                                                d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                                        </svg>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-10 checkTextDIV">
+                                    <h5>Account Added Successfully</h5>
+                                    <p class="text-muted">4 May 2018, 12:59:12pm</p>
+                                </div>
+
+                            </div>
+
+                            <div class="row detailsRow">
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-start leftReference">
+                                    <label>Reference Number</label>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-start text-sm-end rightReference">
+                                    <label>RR232382989FH</label>
+                                </div>
+
+                            </div>
+
+                            <div class="row detailsRow">
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-start leftReference">
+                                    <label>Account Number</label>
+                                </div>
+
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-start text-sm-end rightReference">
+                                    <label>xxxx xxxx xxxx 3106</label>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                        <div class="row my-5 last-row">
+                            <div class="col-12">
+                                <a class="btn btn-dark float-start"> Print </a>
+                                <a id="forthNext" class="btn btn-primary  float-end" href="@Url.Action("
+                                    CardSettings", "Home" )"> Done </a>
+                            </div>
+                        </div>
+
+                    </div> -->
+
+                    <!-- Delete Account -->
+                    <!-- <div hidden id="fifthPage" class="col-12 col-lg-8 mt-3 px-4">
+
+                        <div class="row justify-content-center px-3">
+
+                            <div class="col-12 table-responsive">
+
+                                <table
+                                    class="table table-responsive table-borderless table-hover p-lg-2 p-0 shadow-sm rounded-8 bg-white"
+                                    style="width:100%">
+                                    <thead class="bg-dark text-white rounded-8">
+                                        <tr style="text-align:center">
+                                            <th class="small">Delete</th>
+                                            <th class="small">Account Number</th>
+                                            <th class="small">Account Type</th>
+                                            <th class="small">Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Current</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Current</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Visa Debit Card</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Current</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Current</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Visa Debit Card</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Savings</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Loan/Financing</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Loan/Financing</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Current</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Savings</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Current</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+                                        <tr style="text-align:center">
+                                            <td>
+                                                <input class="form-check-input" type="radio" name="flexRadioDefault">
+                                            </td>
+                                            <td class="title">123457894112</td>
+                                            <td class="title">MasterCard</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+
+                        <div class="row my-5 last-row">
+                            <div class="col-12">
+
+                                <a class="btn btn-dark float-start" href="@Url.Action(" Cheque", "Home" )">
+                                    Back
+                                </a>
+                                <a id="btnDel" class="btn btn-primary  float-end"> Delete </a>
+                            </div>
+                        </div>
+
+                    </div> -->
+
+                    <div hidden id="sixthPage" class="col-12 col-lg-8 mt-3 px-4">
+
+                        <div class="row justify-content-center">
+
+                            <div class="col-12 table-responsive mb-2">
+
+                                <table
+                                    class="table table-responsive table-borderless table-hover p-lg-2 p-0 shadow-sm rounded-8 bg-white"
+                                    style="width:100%">
+                                    <thead class="bg-dark text-white rounded-8">
+                                        <tr style="text-align:center">
+
+                                            <th class="small">Account No.</th>
+                                            <th class="small">Account Type</th>
+                                            <th class="small">Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="text-align:center">
+
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Current</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+                        </div>
+
+
+
+                        <div class="row mt-2 pb-5 last-row">
+                            <div class="col-6 text-start text-lg-start mt-3">
+                                <button class="btn btn-dark mb-3 mb-lg-0 mt-0 mt-1g-0 btnBackPac">Back</button>
+                            </div>
+                            <div class="col-6 text-end text-lg-end mt-3">
+                                <button id="confirmBtn" class="btn btn-primary mb-3 mb-1g-0 mt-1g-0 tranBtn">
+                                    Next
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- <div hidden id="seventhPage" class="col-12 col-lg-8 mt-3 px-4">
+
+                        <div class="p-4 shadow bg-white rounded-8">
+
+                            <div class="row logoRow mb-3">
+
+                                <div class="col-2 checkIconDIV">
+
+                                    <div class="successIcon text-start">
+                                        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                                            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+                                            <path class="checkmark__check" fill="none"
+                                                d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+                                        </svg>
+                                    </div>
+
+                                </div>
+
+                                <div class="col-10 checkTextDIV">
+                                    <h5>Deletion Completed</h5>
+                                    <p class="text-muted">4 May 2018, 12:59:12pm</p>
+                                </div>
+
+                            </div>
+
+                            <div class="col-12 table-responsive">
+
+                                <table
+                                    class="table table-responsive table-borderless table-hover p-lg-2 p-0 shadow-sm rounded-8 bg-white"
+                                    style="width:100%">
+                                    <thead class="bg-dark text-white rounded-8">
+                                        <tr style="text-align:center">
+
+                                            <th class="small">Account Number</th>
+                                            <th class="small">Account Type</th>
+                                            <th class="small">Status</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr style="text-align:center">
+
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Current</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+
+                                        <tr style="text-align:center">
+
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Visa Debit Card</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+
+                                        <tr style="text-align:center">
+
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Savings</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+                                        <tr style="text-align:center">
+
+                                            <td class="title">123457894112</td>
+                                            <td class="title">Loan/Financing</td>
+                                            <td class="text-danger">Active</td>
+
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="row my-5 last-row">
+                            <div class="col-12">
+                                <a class="btn btn-dark float-start"> Print </a>
+                                <a id="thirdNext" class="btn btn-primary  float-end" href="@Url.Action(" Cheque", "Home"
+                                    )">
+                                    Done </a>
+                            </div>
+                        </div>
+                    </div> -->
+
+                    <div class="alert alert-info col-10 col-sm-11 col-xxl-18 col-lg-8 rounded-8 shadow-sm my-5 px-3"
+                        role="alert">
+                        <b>Note</b><br>
+                        <ul>
+                            <li>
+                                This function is only available for linking of Personal Individual Accounts and
+                                On-behalf Accounts
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="col-12 col-lg-4 last-row p-4 mt-4 p-sm-2 text-center pictureRow">
+                <img src="~/Images/WebsiteImages/register-win-pbe-login02.jpg" class="img-fluid " />
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <!-- J-Query -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+    <!-- MultiSelect Choices JS-->
+    <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+
+    <!-- FlatPickr -->
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            var display = $('.time'),
+                oneMin = 60;
+
+            //added new variable
+            var selectedAccType;
+
+            $('.mobileNav').each(function () {
+                $(this).removeClass('active');
+            });
+
+            $('.nav-link').each(function () {
+                $(this).removeClass('active');
+            });
+
+            $('.profile').each(function () {
+                $(this).addClass('active');
+            });
+
+            $('.profileMenu').addClass('active');
+
+            $('#accTypeSelect').change(function () {
+                selectedAccType = $(this).children("option:selected").text();
+            });
+
+            $("#addAccountBtn").click(function () {
+                $('#firstPage').attr('hidden', true);
+                $('#secondPage').attr('hidden', false);
+                $('#thirdPage').attr('hidden', true);
+                $('#fourthPage').attr('hidden', true);
+                $('#fifthPage').attr('hidden', true);
+                $('#sixthPage').attr('hidden', true);
+                $('#seventhPage').attr('hidden', true);
+
+                $("#addDelAccTitle").html("Add Account");
+            })
+
+            $("#deleteBtn").click(function () {
+                $('#firstPage').attr('hidden', true);
+                $('#secondPage').attr('hidden', true);
+                $('#thirdPage').attr('hidden', true);
+                $('#fourthPage').attr('hidden', true);
+                $('#fifthPage').attr('hidden', true);
+                $('#sixthPage').attr('hidden', false);
+                $('#seventhPage').attr('hidden', true);
+
+                $("#addDelAccTitle").html("Delete Account");
+            })
+
+            // $('#firstNext').on('click', function () {
+
+            //     if ($('#radio-6').is(':checked')) {
+            //         $('#secondPage').attr('hidden', false);
+            //         $('#thirdPage').attr('hidden', true);
+            //         isSuccess = true;
+            //     }
+
+            //     else {
+            //         $('#sixthPage').attr('hidden', true);
+            //         $('#fifthPage').attr('hidden', false);
+            //         isSuccess = false;
+
+            //     }
+            //     $('#firstPage').attr('hidden', true);
+            //     $('#fourthPage').attr('hidden', true);
+            //     $('#seventhPage').attr('hidden', true);
+
+            // });
+
+            $('#secondNext').on('click', function () {
+
+                if (validate() == true) {
+                    $('#thirdPage').attr('hidden', false);
+                    $('#secondPage').attr('hidden', true);
+                    $('#firstPage').attr('hidden', true);
+                    $('#forthPage').attr('hidden', true);
+                    $('#fifthPage').attr('hidden', true);
+                    $('#sixthPage').attr('hidden', true);
+                    $('#seventhPage').attr('hidden', true);
+                }
+                //added dynamic account type input
+                $("#accTypeInput").val(selectedAccType);
+
+                //additional input will appear for some account type
+                if (selectedAccType == "Credit / Debit Card") {
+                    $(".cvvNo").prop("hidden", false);
+                }
+                if (selectedAccType == "Hire Purchase Account") {
+                    $(".hpNoteNo").prop("hidden", false);
+                }
+                if (selectedAccType == "Loans Account") {
+                    $(".loanNoteNo").prop("hidden", false);
+                }
+            });
+
+            $('#thirdNext').on('click', function () {
+                Swal.fire({
+                    title: 'Account Added Successfully',
+                    icon: 'success',
+                    customClass: {
+                        title: 'alertFontStyle'
+                    }
+                }).then(function () {
+                    $('#firstPage').prop('hidden', false);
+                    $('#secondPage').prop('hidden', true);
+                    $('#thirdPage').prop('hidden', true);
+                    $('#fourthage').prop('hidden', true);
+                    $('#fifthPage').prop('hidden', true);
+                    $('#sixthPage').prop('hidden', true);
+                    $('#seventhPage').prop('hidden', true);
+
+                    $("#addDelAccTitle").html("Add / Delete Account");
+                    $('#accTable tr:last').after('<tr style="text-align:center"><td><input class="form-check-input deleteAccRadio" type="radio" name="flexRadioDefault"></td><td class="title">135792468069</td><td class="title">Visa Debit Card</td><td class="text-danger">Active</td></tr>');
+                });
+            });
+
+            $('.reqPacBtn').on('click', function () {
+                Swal.fire(
+                    'OTP is Sent!',
+                    'OTP sent to your phone number 012 - * * * * 123',
+                    'success'
+                )
+                $('#thirdNext').removeClass('disabled');
+                // $('#confirmBtn').removeClass('disabled');
+                $('.reqPacBtn').addClass('disabled');
+                $('.timerText').prop("hidden", false);
+                startTimer(oneMin, display);
+            });
+
+            function validate() {
+                var thisValue = "";
+                var strResult = "";
+
+                // Start Date
+
+                thisValue = $("#accTypeSelect").val();
+                strResult = onInputValidate(thisValue);
+                $("#accTypeSelect").next(".text-danger").html(strResult);
+                if (strResult == "") {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            function onInputValidate(thisValue) {
+
+                if (thisValue == null || thisValue == "" || thisValue == "Please select") {
+                    return "<span>This field is required.</span>";
+                }
+                return "";
+            }
+
+        });
+
+        $(".deleteAccRadio").change(function () {
+            $('#deleteBtn').removeClass("disabled");
+        })
+
+        $('#btnDel').on('click', function () {
+
+            $('#fifthPage').prop('hidden', true);
+            $('#sixthPage').prop('hidden', false);
+            $('#seventhPage').prop('hidden', true);
+        });
+
+        $('#confirmBtn').on('click', function () {
+            Swal.fire({
+                title: 'Do you want to delete the account?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Submit',
+                allowOutsideClick: false,
+                customClass: {
+                    title: 'alertFontStyle'
+                }
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Account Deleted Successfully!',
+                        icon: 'success',
+                        customClass: {
+                            title: 'alertFontStyle'
+                        }
+                    }).then(function () {
+                        $('#firstPage').prop('hidden', false);
+                        $('#secondPage').prop('hidden', true);
+                        $('#thirdPage').prop('hidden', true);
+                        $('#fourthage').prop('hidden', true);
+                        $('#fifthPage').prop('hidden', true);
+                        $('#sixthPage').prop('hidden', true);
+                        $('#seventhPage').prop('hidden', true);
+
+                        $("#addDelAccTitle").html("Add / Delete Account");
+                        $('#accTable tr:last').remove();
+                    });
+                }
+            })
+        });
+
+        $('#authMethod').change(function () {
+            var selectedIndex = $(this).children('option:selected').index();
+            if (selectedIndex != 0) {
+                $(this).parent().removeClass('col-sm-12').addClass('col-sm-9');
+                $(this).parent().siblings('.authConfirmBtn').attr('hidden', false);
+            }
+
+            var cases = $("#authMethod option:selected").val();
+            if (cases == "pac") {
+                $("#pac").removeClass("d-none");
+                $("#secure").addClass("d-none");
+                $("#noti").addClass("d-none");
+                $("#token").addClass("d-none");
+            }
+            if (cases == "token") {
+                $("#token").removeClass("d-none");
+                $("#pac").addClass("d-none");
+                $("#secure").addClass("d-none");
+                $("#noti").addClass("d-none");
+            }
+            if (cases == "secure") {
+                $("#secure").removeClass("d-none");
+                $("#pac").addClass("d-none");
+                $("#token").addClass("d-none");
+                $("#noti").addClass("d-none");
+            }
+            if (cases == "noti") {
+                $("#noti").removeClass("d-none");
+                $("#pac").addClass("d-none");
+                $("#token").addClass("d-none");
+                $("#secure").addClass("d-none");
+            }
+        });
+
+        $('.authConfirmBtn button').click(function () {
+            $(this).parent().siblings().find('#authMethod').attr('disabled', true);
+            $(this).parent().siblings('.authField').attr('hidden', false);
+            $(this).attr('disabled', true);
+        });
+
+        var progressBar = $('.progress-bar');
+        var progressNumber = 0;
+
+        setInterval(function () {
+            progressNumber++;
+            progressBar.css('width', progressNumber + '%');
+            progressBar.attr('aria-valuenow', progressNumber);
+        }, 500);
+
+        var selectedAccType = $("#accTypeSelect option:selected").text();
+
+        function startTimer(duration, display) {
+            var timer = duration, minutes, seconds;
+
+            var timerInterval = setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.text(minutes + " : " + seconds);
+
+                if (--timer < 0) {
+                    clearInterval(timerInterval);
+                    timer = duration;
+                    $('.reqPacBtn').removeClass('disabled');
+                    $('.timerText').prop("hidden", true);
+                }
+            }, 1000);
+        };
+
+        //reset button
+        $('.btnReset').on('click', function () {
+            $('form')[0].reset();
+        });
+
+    </script>
+
+</body>
+
+</html>
